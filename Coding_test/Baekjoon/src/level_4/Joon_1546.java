@@ -18,19 +18,22 @@ public class Joon_1546 {
 		
 		String s = bf.readLine();
 		StringTokenizer st = new StringTokenizer(s);
-		int[] grade = new int[N];
-		int sum=0;
+		double [] grade = new double[N];
 		
 		for(int i=0; i<N; i++) {
 			grade[i] = Integer.parseInt(st.nextToken());
+		}
+		
+		double max=grade[0];
+		if(N>1) for(int j=1; j<N; j++) max=Math.max(grade[j], max);
+		
+		double sum = 0.0;
+		for(int i=0; i<N; i++) {
+			grade[i] = (double) (grade[i]*100)/max;
 			sum += grade[i];
 		}
 		
-		int max=grade[0];
-		if(N>1) for(int j=1; j<N-1; j++) max=Math.max(grade[j], max);
-		
-		double mean = 0.0;
-		if(max!=0) mean = (double) (sum*100)/(N*max);
+		double mean = (double) sum / N;
 		
 		bw.write(mean + "\n");
 		bw.flush();
