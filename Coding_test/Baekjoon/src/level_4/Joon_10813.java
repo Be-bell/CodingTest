@@ -7,34 +7,38 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.StringTokenizer;
 
-public class Joon_10810 {
+public class Joon_10813 {
 
 	public static void main(String[] args) throws IOException{
 		
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		
-		String s = bf.readLine();
-		StringTokenizer st1 = new StringTokenizer(s);
+		String s1 = bf.readLine();
+		StringTokenizer st1 = new StringTokenizer(s1);
 		
 		int N = Integer.parseInt(st1.nextToken());
 		int M = Integer.parseInt(st1.nextToken());
-		
+
 		int[] basket = new int[N];
+		for(int t=0; t<N; t++) {
+			basket[t] = t+1;
+		}
 		
-		for(int ix=0; ix<M; ix++) {
-			String inputBall = bf.readLine();
-			StringTokenizer st2 = new StringTokenizer(inputBall);
-			int i = Integer.parseInt(st2.nextToken());
-			int j = Integer.parseInt(st2.nextToken());
-			int k = Integer.parseInt(st2.nextToken());
-			for(int t=i-1; t<j; t++) {
-				basket[t] = k;
+		for(int k=0; k<M; k++) {
+			String s2 = bf.readLine();
+			StringTokenizer st2 = new StringTokenizer(s2);
+			int i = Integer.parseInt(st2.nextToken()) - 1;
+			int j = Integer.parseInt(st2.nextToken()) - 1;
+			if(i!=j) {
+				int tmp = basket[i];
+				basket[i] = basket[j];
+				basket[j] = tmp;
 			}
 		}
 		
-		for(int ix=0; ix<N; ix++) {
-			bw.write(basket[ix] + " ");
+		for(int t=0; t<N; t++) {
+			bw.write(basket[t] + " ");
 		}
 		
 		bw.flush();
